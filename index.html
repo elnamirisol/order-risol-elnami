@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Menu - ELNAMI RISOL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* === PALET WARNA BARU (Warm Amber & Gold) === */
+            --bg-cream: #FFFBEB;         /* Cream Hangat Soft */
+            --blob-bg: #FDE68A;          /* Warm Amber Light (Header Header) */
+            --green-title: #D97706;       /* Gold/Amber Utama (Menggantikan Hijau Tua) */
+            --brown-title: #451A03;      /* Deep Chocolate Brown (Menggantikan Cokelat Tua) */
+            --badge-orange: #B45309;     /* Deep Amber Badge (Menggantikan Oranye) */
+            --card-border: #F59E0B;      /* Frame Border Foto (Warm Gold) */
+            --accent-bg: #FEF3C7;        /* Background Box Ringkasan & Elemen Pendukung */
+            --accent-border: #FCD34D;    /* Border Box Ringkasan */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: #FEF3C7;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--bg-cream);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(69, 26, 3, 0.1);
+            padding-bottom: 20px;
+            overflow: hidden;
+            border: 2px solid #FDE68A;
+        }
+
+        /* HEADER BLOB */
+        .header-wrapper {
+            position: relative;
+            background-color: var(--bg-cream);
+            padding: 30px 10px 20px 10px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .header-blob {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110%;
+            height: 140px;
+            background: var(--blob-bg);
+            border-radius: 0 0 50% 50% / 0 0 40% 40%;
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .title-text h1 {
+            font-family: 'Fredoka', cursive;
+            color: var(--green-title);
+            font-size: 32px;
+            line-height: 1;
+            text-shadow: -2px -2px 0 #FFF, 2px -2px 0 #FFF, -2px 2px 0 #FFF, 2px 2px 0 #FFF, 0 3px 0 #92400E;
+            margin-bottom: 2px;
+        }
+
+        .title-text h2 {
+            font-family: 'Fredoka', cursive;
+            color: var(--brown-title);
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        .mascot-svg, .doodle-svg {
+            width: 65px;
+            height: 75px;
+            flex-shrink: 0;
+        }
+
+        /* MENU GRID */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 10px;
+            padding: 15px;
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -5px;
+            right: 15px;
+            background: var(--badge-orange);
+            color: white;
+            font-family: 'Fredoka', cursive;
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 2px solid #FFF;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            z-index: 3;
+        }
+
+        .img-frame {
+            width: 105px;
+            height: 105px;
+            border-radius: 50%;
+            border: 4px solid var(--card-border);
+            overflow: hidden;
+            background: #FFF;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .menu-name {
+            font-family: 'Fredoka', cursive;
+            color: var(--brown-title);
+            font-size: 16px;
+            margin: 6px 0 4px 0;
+            text-align: center;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent-bg);
+            padding: 3px 8px;
+            border-radius: 15px;
+            border: 1px solid var(--accent-border);
+        }
+
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: var(--badge-orange);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .qty-input {
+            width: 25px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--brown-title);
+        }
+
+        /* FORM & PAYMENT SECTION */
+        .form-section {
+            padding: 0 15px;
+            margin-top: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--brown-title);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #FCD34D;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #FFF;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #D97706;
+        }
+
+        .summary-box {
+            background: var(--accent-bg);
+            border: 2px solid var(--accent-border);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Fredoka', cursive;
+            font-size: 16px;
+            color: var(--green-title);
+        }
+
+        /* METODE PEMBAYARAN & QR CODE */
+        .payment-box {
+            background: #FFF;
+            border: 2px dashed #FCD34D;
+            border-radius: 14px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .payment-title {
+            font-family: 'Fredoka', cursive;
+            color: var(--brown-title);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .rekening-info {
+            font-size: 13px;
+            color: var(--brown-title);
+            line-height: 1.5;
+            margin-bottom: 12px;
+            background: var(--bg-cream);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .qr-code-img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            border: 2px solid #FCD34D;
+            border-radius: 10px;
+            margin: 5px auto;
+            display: block;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-family: 'Fredoka', cursive;
+            font-size: 17px;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            background: #1EBE5D;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header Atas Persis Gambar -->
+    <div class="header-wrapper">
+        <div class="header-blob"></div>
+        <div class="header-content">
+            <!-- Mascot -->
+            <svg class="mascot-svg" viewBox="0 0 100 120">
+                <rect x="25" y="15" width="50" height="75" rx="15" fill="#F59E0B" stroke="#451A03" stroke-width="4"/>
+                <circle cx="42" cy="38" r="4" fill="#000"/>
+                <circle cx="58" cy="38" r="4" fill="#000"/>
+                <path d="M 44 48 Q 50 54 56 48" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+                <path d="M 25 50 L 10 40" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 75 50 L 90 45" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 40 90 L 40 105" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 60 90 L 60 105" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+
+            <div class="title-text">
+                <h1>Daftar Menu</h1>
+                <h2>ELNAMI RISOL</h2>
+            </div>
+
+            <!-- Doodle Piring -->
+            <svg class="doodle-svg" viewBox="0 0 100 100">
+                <ellipse cx="50" cy="70" rx="42" ry="15" fill="none" stroke="#451A03" stroke-width="3"/>
+                <rect x="25" y="45" width="50" height="20" rx="8" fill="none" stroke="#451A03" stroke-width="3"/>
+            </svg>
+        </div>
+    </div>
+
+    <form id="orderForm">
+        <!-- Grid Menu Risol -->
+        <div class="menu-grid">
+            <!-- Beef Mayo -->
+            <div class="menu-card">
+                <span class="price-badge">5 k</span>
+                <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/FILE_ID_BEEF_MAYO" alt="Beef Mayo"></div>
+                <div class="menu-name">Beef Mayo</div>
+                <div class="qty-control">
+                    <button type="button" class="qty-btn" onclick="updateQty('beefMayo', -1)">-</button>
+                    <input type="number" id="beefMayo" class="qty-input" value="0" readonly>
+                    <button type="button" class="qty-btn" onclick="updateQty('beefMayo', 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Ayam Suwir -->
+            <div class="menu-card">
+                <span class="price-badge">5 k</span>
+                <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/FILE_ID_AYAM_SUWIR" alt="Ayam Suwir"></div>
+                <div class="menu-name">Ayam Suwir</div>
+                <div class="qty-control">
+                    <button type="button" class="qty-btn" onclick="updateQty('ayamSuwir', -1)">-</button>
+                    <input type="number" id="ayamSuwir" class="qty-input" value="0" readonly>
+                    <button type="button" class="qty-btn" onclick="updateQty('ayamSuwir', 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Coklat Keju -->
+            <div class="menu-card">
+                <span class="price-badge">5 k</span>
+                <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/FILE_ID_COKLAT_KEJU" alt="Coklat Keju"></div>
+                <div class="menu-name">Coklat Keju</div>
+                <div class="qty-control">
+                    <button type="button" class="qty-btn" onclick="updateQty('coklatKeju', -1)">-</button>
+                    <input type="number" id="coklatKeju" class="qty-input" value="0" readonly>
+                    <button type="button" class="qty-btn" onclick="updateQty('coklatKeju', 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Coklat Pisang -->
+            <div class="menu-card">
+                <span class="price-badge">5 k</span>
+                <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/FILE_ID_COKLAT_PISANG" alt="Coklat Pisang"></div>
+                <div class="menu-name">Coklat Pisang</div>
+                <div class="qty-control">
+                    <button type="button" class="qty-btn" onclick="updateQty('coklatPisang', -1)">-</button>
+                    <input type="number" id="coklatPisang" class="qty-input" value="0" readonly>
+                    <button type="button" class="qty-btn" onclick="updateQty('coklatPisang', 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Matcha Keju -->
+            <div class="menu-card">
+                <span class="price-badge">5 k</span>
+                <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/FILE_ID_MATCHA_KEJU" alt="Matcha Keju"></div>
+                <div class="menu-name">Matcha Keju</div>
+                <div class="qty-control">
+                    <button type="button" class="qty-btn" onclick="updateQty('matchaKeju', -1)">-</button>
+                    <input type="number" id="matchaKeju" class="qty-input" value="0" readonly>
+                    <button type="button" class="qty-btn" onclick="updateQty('matchaKeju', 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Bolognaise Moza -->
+            <div class="menu-card">
+                <span class="price-badge">6 k</span>
+                <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/FILE_ID_BOLOGNAISE_MOZA" alt="Bolognaise Moza"></div>
+                <div class="menu-name">Bolognaise Moza</div>
+                <div class="qty-control">
+                    <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMoza', -1)">-</button>
+                    <input type="number" id="bolognaiseMoza" class="qty-input" value="0" readonly>
+                    <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMoza', 1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Pemesan -->
+        <div class="form-section">
+            <div class="form-group">
+                <label>Nama Pemesan *</label>
+                <input type="text" id="nama" placeholder="Isi nama pemesan" required>
+            </div>
+            <div class="form-group">
+                <label>Catatan</label>
+                <textarea id="catatan" rows="2" placeholder="Tulis catatan pesanan di sini..."></textarea>
+            </div>
+
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span>Total Risol: <span id="totalPcs">0</span> Pcs</span>
+                    <span>Total: <span id="totalHarga">Rp 0</span></span>
+                </div>
+            </div>
+
+            <!-- Pembayaran / QRIS -->
+            <div class="payment-box">
+                <div class="payment-title">Pilihan Pembayaran</div>
+                <div class="rekening-info">
+                    <strong>BCA:</strong> 1234567890 a.n Elnami Risol<br>
+                    <strong>Mandiri:</strong> 0987654321 a.n Elnami Risol
+                </div>
+                <p style="font-size: 12px; color: #666; margin-bottom: 6px;">Atau Scan QRIS di bawah ini:</p>
+                <!-- Gambar QRIS via Google Drive -->
+                <img src="https://lh3.googleusercontent.com/d/FILE_ID_QRIS" alt="QRIS Pembayaran" class="qr-code-img" onerror="this.style.display='none'">
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnSubmit">
+                Konfirmasi & Kirim via WhatsApp
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const SCRIPT_URL = "URL_GOOGLE_APPS_SCRIPT_KAMU";
+    const NOMOR_WA = "6281287170871"; 
+
+    const prices = {
+        beefMayo: 5000,
+        ayamSuwir: 5000,
+        coklatKeju: 5000,
+        coklatPisang: 5000,
+        matchaKeju: 5000,
+        bolognaiseMoza: 6000
+    };
+
+    const names = {
+        beefMayo: 'Beef Mayo',
+        ayamSuwir: 'Ayam Suwir',
+        coklatKeju: 'Coklat Keju',
+        coklatPisang: 'Coklat Pisang',
+        matchaKeju: 'Matcha Keju',
+        bolognaiseMoza: 'Bolognaise Moza'
+    };
+
+    function updateQty(id, change) {
+        const input = document.getElementById(id);
+        let current = parseInt(input.value) || 0;
+        current += change;
+        if (current < 0) current = 0;
+        input.value = current;
+        calculateTotal();
+    }
+
+    function calculateTotal() {
+        let totalPcs = 0;
+        let totalHarga = 0;
+
+        for (let key in prices) {
+            let qty = parseInt(document.getElementById(key).value) || 0;
+            totalPcs += qty;
+            totalHarga += qty * prices[key];
+        }
+
+        document.getElementById('totalPcs').innerText = totalPcs;
+        document.getElementById('totalHarga').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nama = document.getElementById('nama').value.trim();
+        const catatan = document.getElementById('catatan').value.trim();
+
+        let orderList = [];
+        let totalPcs = 0;
+        let totalHarga = 0;
+
+        for (let key in prices) {
+            let qty = parseInt(document.getElementById(key).value) || 0;
+            if (qty > 0) {
+                let subtotal = qty * prices[key];
+                orderList.push(`- ${names[key]}: ${qty} pcs (Rp ${subtotal.toLocaleString('id-ID')})`);
+                totalPcs += qty;
+                totalHarga += subtotal;
+            }
+        }
+
+        if (totalPcs === 0) {
+            alert('Silakan pilih minimal 1 risol.');
+            return;
+        }
+
+        const btn = document.getElementById('btnSubmit');
+        btn.disabled = true;
+        btn.innerText = 'Memproses...';
+
+        const formData = new FormData();
+        formData.append('Tanggal', new Date().toLocaleString('id-ID'));
+        formData.append('Nama', nama);
+        formData.append('Catatan', catatan);
+        formData.append('Beef Mayo', document.getElementById('beefMayo').value);
+        formData.append('Ayam Suwir', document.getElementById('ayamSuwir').value);
+        formData.append('Coklat Keju', document.getElementById('coklatKeju').value);
+        formData.append('Coklat Pisang', document.getElementById('coklatPisang').value);
+        formData.append('Matcha Keju', document.getElementById('matchaKeju').value);
+        formData.append('Bolognaise Moza', document.getElementById('bolognaiseMoza').value);
+        formData.append('Total Pcs', totalPcs);
+        formData.append('Total Tagihan', totalHarga);
+
+        fetch(SCRIPT_URL, { method: 'POST', body: formData }).catch(err => console.log(err));
+
+        let text = `*HALO ELNAMI RISOL, SAYA SUDAH ORDER*\n\n`;
+        text += `*Nama:* ${nama}\n`;
+        text += `*Catatan:* ${catatan || '-'}\n\n`;
+        text += `*Detail Pesanan:*\n${orderList.join('\n')}\n\n`;
+        text += `*Total Risol:* ${totalPcs} Pcs\n`;
+        text += `*Total Transfer:* Rp ${totalHarga.toLocaleString('id-ID')}\n\n`;
+        text += `Berikut saya lampirkan bukti transfernya ya. Terima kasih!`;
+
+        window.open(`https://wa.me/${NOMOR_WA}?text=${encodeURIComponent(text)}`, '_blank');
+
+        btn.disabled = false;
+        btn.innerText = 'Konfirmasi & Kirim via WhatsApp';
+    });
+</script>
+
+</body>
+</html>
