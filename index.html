@@ -10,15 +10,14 @@
     
     <style>
         :root {
-            /* === PALET WARNA BARU (Warm Amber & Gold) === */
-            --bg-cream: #FFFBEB;         /* Cream Hangat Soft */
-            --blob-bg: #FDE68A;          /* Warm Amber Light (Header Header) */
-            --green-title: #D97706;       /* Gold/Amber Utama (Menggantikan Hijau Tua) */
-            --brown-title: #451A03;      /* Deep Chocolate Brown (Menggantikan Cokelat Tua) */
-            --badge-orange: #B45309;     /* Deep Amber Badge (Menggantikan Oranye) */
-            --card-border: #F59E0B;      /* Frame Border Foto (Warm Gold) */
-            --accent-bg: #FEF3C7;        /* Background Box Ringkasan & Elemen Pendukung */
-            --accent-border: #FCD34D;    /* Border Box Ringkasan */
+            --bg-cream: #FFFBEB;         
+            --blob-bg: #FDE68A;          
+            --green-title: #D97706;       
+            --brown-title: #451A03;      
+            --badge-orange: #B45309;     
+            --card-border: #F59E0B;      
+            --accent-bg: #FEF3C7;        
+            --accent-border: #FCD34D;    
         }
 
         * {
@@ -111,17 +110,22 @@
             flex-direction: column;
             align-items: center;
             position: relative;
+            background: #FFF;
+            padding: 10px 8px;
+            border-radius: 16px;
+            border: 1px solid #FCD34D;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .price-badge {
             position: absolute;
             top: -5px;
-            right: 15px;
+            right: 10px;
             background: var(--badge-orange);
             color: white;
             font-family: 'Fredoka', cursive;
-            font-size: 14px;
-            padding: 4px 10px;
+            font-size: 13px;
+            padding: 3px 8px;
             border-radius: 12px;
             border: 2px solid #FFF;
             box-shadow: 0 2px 4px rgba(0,0,0,0.15);
@@ -129,10 +133,10 @@
         }
 
         .img-frame {
-            width: 105px;
-            height: 105px;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
-            border: 4px solid var(--card-border);
+            border: 3px solid var(--card-border);
             overflow: hidden;
             background: #FFF;
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
@@ -147,40 +151,56 @@
         .menu-name {
             font-family: 'Fredoka', cursive;
             color: var(--brown-title);
-            font-size: 16px;
-            margin: 6px 0 4px 0;
+            font-size: 15px;
+            margin: 6px 0 2px 0;
             text-align: center;
+        }
+
+        /* VARIAN TYPE (GORENG / FROZEN) */
+        .variant-block {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .variant-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--brown-title);
+            margin-bottom: 2px;
         }
 
         .qty-control {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             background: var(--accent-bg);
-            padding: 3px 8px;
-            border-radius: 15px;
+            padding: 2px 6px;
+            border-radius: 12px;
             border: 1px solid var(--accent-border);
         }
 
         .qty-btn {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             border: none;
             background: var(--badge-orange);
             color: white;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
         }
 
         .qty-input {
-            width: 25px;
+            width: 22px;
             text-align: center;
             border: none;
             background: transparent;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--brown-title);
         }
 
@@ -295,7 +315,7 @@
 <body>
 
 <div class="container">
-    <!-- Header Atas Persis Gambar -->
+    <!-- Header Atas -->
     <div class="header-wrapper">
         <div class="header-blob"></div>
         <div class="header-content">
@@ -327,15 +347,28 @@
     <form id="orderForm">
         <!-- Grid Menu Risol -->
         <div class="menu-grid">
+            
             <!-- Beef Mayo -->
             <div class="menu-card">
-                <span class="price-badge">5 k</span>
+                <span class="price-badge">6 k</span>
                 <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/1Z6lceV7x7u4MnbZGu1cXt7N0iM6__3g-" alt="Beef Mayo"></div>
                 <div class="menu-name">Beef Mayo</div>
-                <div class="qty-control">
-                    <button type="button" class="qty-btn" onclick="updateQty('beefMayo', -1)">-</button>
-                    <input type="number" id="beefMayo" class="qty-input" value="0" readonly>
-                    <button type="button" class="qty-btn" onclick="updateQty('beefMayo', 1)">+</button>
+                
+                <div class="variant-block">
+                    <span class="variant-label">Goreng</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('beefMayoGoreng', -1)">-</button>
+                        <input type="number" id="beefMayoGoreng" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('beefMayoGoreng', 1)">+</button>
+                    </div>
+                </div>
+                <div class="variant-block">
+                    <span class="variant-label">Frozen</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('beefMayoFrozen', -1)">-</button>
+                        <input type="number" id="beefMayoFrozen" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('beefMayoFrozen', 1)">+</button>
+                    </div>
                 </div>
             </div>
 
@@ -344,10 +377,22 @@
                 <span class="price-badge">5 k</span>
                 <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/10IvxSHpDUovdoJmTnLhuKNKvPNb9R1HH" alt="Ayam Suwir"></div>
                 <div class="menu-name">Ayam Suwir</div>
-                <div class="qty-control">
-                    <button type="button" class="qty-btn" onclick="updateQty('ayamSuwir', -1)">-</button>
-                    <input type="number" id="ayamSuwir" class="qty-input" value="0" readonly>
-                    <button type="button" class="qty-btn" onclick="updateQty('ayamSuwir', 1)">+</button>
+                
+                <div class="variant-block">
+                    <span class="variant-label">Goreng</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('ayamSuwirGoreng', -1)">-</button>
+                        <input type="number" id="ayamSuwirGoreng" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('ayamSuwirGoreng', 1)">+</button>
+                    </div>
+                </div>
+                <div class="variant-block">
+                    <span class="variant-label">Frozen</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('ayamSuwirFrozen', -1)">-</button>
+                        <input type="number" id="ayamSuwirFrozen" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('ayamSuwirFrozen', 1)">+</button>
+                    </div>
                 </div>
             </div>
 
@@ -356,10 +401,22 @@
                 <span class="price-badge">5 k</span>
                 <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/1mS3-hMHgxrQgYrgJMlRY7I8I4ciSgj7D" alt="Coklat Keju"></div>
                 <div class="menu-name">Coklat Keju</div>
-                <div class="qty-control">
-                    <button type="button" class="qty-btn" onclick="updateQty('coklatKeju', -1)">-</button>
-                    <input type="number" id="coklatKeju" class="qty-input" value="0" readonly>
-                    <button type="button" class="qty-btn" onclick="updateQty('coklatKeju', 1)">+</button>
+                
+                <div class="variant-block">
+                    <span class="variant-label">Goreng</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatKejuGoreng', -1)">-</button>
+                        <input type="number" id="coklatKejuGoreng" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatKejuGoreng', 1)">+</button>
+                    </div>
+                </div>
+                <div class="variant-block">
+                    <span class="variant-label">Frozen</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatKejuFrozen', -1)">-</button>
+                        <input type="number" id="coklatKejuFrozen" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatKejuFrozen', 1)">+</button>
+                    </div>
                 </div>
             </div>
 
@@ -368,10 +425,22 @@
                 <span class="price-badge">5 k</span>
                 <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/1m72svncb2P4PsUavM_C92MNCpi2KISZl" alt="Coklat Pisang"></div>
                 <div class="menu-name">Coklat Pisang</div>
-                <div class="qty-control">
-                    <button type="button" class="qty-btn" onclick="updateQty('coklatPisang', -1)">-</button>
-                    <input type="number" id="coklatPisang" class="qty-input" value="0" readonly>
-                    <button type="button" class="qty-btn" onclick="updateQty('coklatPisang', 1)">+</button>
+                
+                <div class="variant-block">
+                    <span class="variant-label">Goreng</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatPisangGoreng', -1)">-</button>
+                        <input type="number" id="coklatPisangGoreng" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatPisangGoreng', 1)">+</button>
+                    </div>
+                </div>
+                <div class="variant-block">
+                    <span class="variant-label">Frozen</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatPisangFrozen', -1)">-</button>
+                        <input type="number" id="coklatPisangFrozen" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('coklatPisangFrozen', 1)">+</button>
+                    </div>
                 </div>
             </div>
 
@@ -380,10 +449,22 @@
                 <span class="price-badge">5 k</span>
                 <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/19Zaqb4WdyBiSANl-ysJkIQ5wsdBHeW7f" alt="Matcha Keju"></div>
                 <div class="menu-name">Matcha Keju</div>
-                <div class="qty-control">
-                    <button type="button" class="qty-btn" onclick="updateQty('matchaKeju', -1)">-</button>
-                    <input type="number" id="matchaKeju" class="qty-input" value="0" readonly>
-                    <button type="button" class="qty-btn" onclick="updateQty('matchaKeju', 1)">+</button>
+                
+                <div class="variant-block">
+                    <span class="variant-label">Goreng</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('matchaKejuGoreng', -1)">-</button>
+                        <input type="number" id="matchaKejuGoreng" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('matchaKejuGoreng', 1)">+</button>
+                    </div>
+                </div>
+                <div class="variant-block">
+                    <span class="variant-label">Frozen</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('matchaKejuFrozen', -1)">-</button>
+                        <input type="number" id="matchaKejuFrozen" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('matchaKejuFrozen', 1)">+</button>
+                    </div>
                 </div>
             </div>
 
@@ -392,12 +473,25 @@
                 <span class="price-badge">6 k</span>
                 <div class="img-frame"><img src="https://lh3.googleusercontent.com/d/1Gcfe7tX0fVbPa_gsOPDlaS5h4E1jLcf2" alt="Bolognaise Moza"></div>
                 <div class="menu-name">Bolognaise Moza</div>
-                <div class="qty-control">
-                    <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMoza', -1)">-</button>
-                    <input type="number" id="bolognaiseMoza" class="qty-input" value="0" readonly>
-                    <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMoza', 1)">+</button>
+                
+                <div class="variant-block">
+                    <span class="variant-label">Goreng</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMozaGoreng', -1)">-</button>
+                        <input type="number" id="bolognaiseMozaGoreng" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMozaGoreng', 1)">+</button>
+                    </div>
+                </div>
+                <div class="variant-block">
+                    <span class="variant-label">Frozen</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMozaFrozen', -1)">-</button>
+                        <input type="number" id="bolognaiseMozaFrozen" class="qty-input" value="0" readonly>
+                        <button type="button" class="qty-btn" onclick="updateQty('bolognaiseMozaFrozen', 1)">+</button>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Form Pemesan -->
@@ -418,11 +512,11 @@
                 </div>
             </div>
 
-         <!-- Pembayaran / QRIS -->
+            <!-- Pembayaran / QRIS -->
             <div class="payment-box">
                 <div class="payment-title">Pilihan Pembayaran</div>
                 <div class="rekening-info">
-                    <strong>BNI:</strong> 1783631095 a.n Delvinda Afitri
+                    <strong>Mandiri:</strong> 1783631095 a.n Elvinda
                 </div>
                 <p style="font-size: 12px; color: #666; margin-bottom: 6px;">Atau Scan QRIS di bawah ini:</p>
                 <img src="https://lh3.googleusercontent.com/d/1Hq2a5PJRQJPV4Nu01upD-SkWS2oA47IW" alt="QRIS Pembayaran" class="qr-code-img" onerror="this.style.display='none'">
@@ -431,29 +525,42 @@
             <button type="submit" class="btn-submit" id="btnSubmit">
                 Konfirmasi & Kirim via WhatsApp
             </button>
-        </div> 
+        </div>
     </form>
-</div> 
+</div>
+
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwXmUSul_mNJ42IuQ4jyvC7rUijgA9TR9S7y8HsDlMajhYCw2v3FG_QJ0ZMwvDmomX6Jw/exec";
-    const NOMOR_WA = "6289507729045"; 
+    const NOMOR_WA = "6281287170871"; 
 
     const prices = {
-        beefMayo: 5000,
-        ayamSuwir: 5000,
-        coklatKeju: 5000,
-        coklatPisang: 5000,
-        matchaKeju: 5000,
-        bolognaiseMoza: 6000
+        beefMayoGoreng: 6000,
+        beefMayoFrozen: 6000,
+        ayamSuwirGoreng: 5000,
+        ayamSuwirFrozen: 5000,
+        coklatKejuGoreng: 5000,
+        coklatKejuFrozen: 5000,
+        coklatPisangGoreng: 5000,
+        coklatPisangFrozen: 5000,
+        matchaKejuGoreng: 5000,
+        matchaKejuFrozen: 5000,
+        bolognaiseMozaGoreng: 6000,
+        bolognaiseMozaFrozen: 6000
     };
 
     const names = {
-        beefMayo: 'Beef Mayo',
-        ayamSuwir: 'Ayam Suwir',
-        coklatKeju: 'Coklat Keju',
-        coklatPisang: 'Coklat Pisang',
-        matchaKeju: 'Matcha Keju',
-        bolognaiseMoza: 'Bolognaise Moza'
+        beefMayoGoreng: 'Beef Mayo (Goreng)',
+        beefMayoFrozen: 'Beef Mayo (Frozen)',
+        ayamSuwirGoreng: 'Ayam Suwir (Goreng)',
+        ayamSuwirFrozen: 'Ayam Suwir (Frozen)',
+        coklatKejuGoreng: 'Coklat Keju (Goreng)',
+        coklatKejuFrozen: 'Coklat Keju (Frozen)',
+        coklatPisangGoreng: 'Coklat Pisang (Goreng)',
+        coklatPisangFrozen: 'Coklat Pisang (Frozen)',
+        matchaKejuGoreng: 'Matcha Keju (Goreng)',
+        matchaKejuFrozen: 'Matcha Keju (Frozen)',
+        bolognaiseMozaGoreng: 'Bolognaise Moza (Goreng)',
+        bolognaiseMozaFrozen: 'Bolognaise Moza (Frozen)'
     };
 
     function updateQty(id, change) {
@@ -512,12 +619,11 @@
         formData.append('Tanggal', new Date().toLocaleString('id-ID'));
         formData.append('Nama', nama);
         formData.append('Catatan', catatan);
-        formData.append('Beef Mayo', document.getElementById('beefMayo').value);
-        formData.append('Ayam Suwir', document.getElementById('ayamSuwir').value);
-        formData.append('Coklat Keju', document.getElementById('coklatKeju').value);
-        formData.append('Coklat Pisang', document.getElementById('coklatPisang').value);
-        formData.append('Matcha Keju', document.getElementById('matchaKeju').value);
-        formData.append('Bolognaise Moza', document.getElementById('bolognaiseMoza').value);
+        
+        for (let key in names) {
+            formData.append(names[key], document.getElementById(key).value || 0);
+        }
+
         formData.append('Total Pcs', totalPcs);
         formData.append('Total Tagihan', totalHarga);
 
