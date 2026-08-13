@@ -45,7 +45,7 @@
             border: 2px solid #FDE68A;
         }
 
-        /* HEADER BLOB */
+        /* HEADER */
         .header-wrapper {
             position: relative;
             background-color: var(--bg-cream);
@@ -156,7 +156,6 @@
             text-align: center;
         }
 
-        /* VARIAN TYPE (GORENG / FROZEN) */
         .variant-block {
             width: 100%;
             display: flex;
@@ -204,7 +203,7 @@
             color: var(--brown-title);
         }
 
-        /* FORM & PAYMENT SECTION */
+        /* FORM & PAYMENT */
         .form-section {
             padding: 0 15px;
             margin-top: 10px;
@@ -252,7 +251,6 @@
             color: var(--green-title);
         }
 
-        /* METODE PEMBAYARAN & QR CODE */
         .payment-box {
             background: #FFF;
             border: 2px dashed #FCD34D;
@@ -315,11 +313,10 @@
 <body>
 
 <div class="container">
-    <!-- Header Atas -->
+    <!-- Header -->
     <div class="header-wrapper">
         <div class="header-blob"></div>
         <div class="header-content">
-            <!-- Mascot -->
             <svg class="mascot-svg" viewBox="0 0 100 120">
                 <rect x="25" y="15" width="50" height="75" rx="15" fill="#F59E0B" stroke="#451A03" stroke-width="4"/>
                 <circle cx="42" cy="38" r="4" fill="#000"/>
@@ -336,7 +333,6 @@
                 <h2>ELNAMI RISOL</h2>
             </div>
 
-            <!-- Doodle Piring -->
             <svg class="doodle-svg" viewBox="0 0 100 100">
                 <ellipse cx="50" cy="70" rx="42" ry="15" fill="none" stroke="#451A03" stroke-width="3"/>
                 <rect x="25" y="45" width="50" height="20" rx="8" fill="none" stroke="#451A03" stroke-width="3"/>
@@ -500,13 +496,15 @@
                 <label>Nama Pemesan *</label>
                 <input type="text" id="nama" placeholder="Isi nama pemesan" required>
             </div>
-            <div class="form-group">
-                <label>Catatan</label>
-                <textarea id="catatan" rows="2" placeholder="Tulis catatan pesanan di sini..."></textarea>
-            </div>
+            
             <div class="form-group">
                 <label>Permintaan Tanggal Delivery *</label>
                 <input type="date" id="tglDelivery" required>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan</label>
+                <textarea id="catatan" rows="2" placeholder="Tulis catatan pesanan di sini..."></textarea>
             </div>
 
             <div class="summary-box">
@@ -520,7 +518,7 @@
             <div class="payment-box">
                 <div class="payment-title">Pilihan Pembayaran</div>
                 <div class="rekening-info">
-                    <strong>BNI:</strong> 1783631095 a.n Delvinda Afitri
+                    <strong>BNI:</strong> 1783631095 a.n Elvinda
                 </div>
                 <p style="font-size: 12px; color: #666; margin-bottom: 6px;">Atau Scan QRIS di bawah ini:</p>
                 <img src="https://lh3.googleusercontent.com/d/1Hq2a5PJRQJPV4Nu01upD-SkWS2oA47IW" alt="QRIS Pembayaran" class="qr-code-img" onerror="this.style.display='none'">
@@ -538,8 +536,8 @@
     const NOMOR_WA = "6281287170871"; 
 
     const prices = {
-        beefMayoGoreng: 6000,
-        beefMayoFrozen: 6000,
+        beefMayoGoreng: 5000,
+        beefMayoFrozen: 5000,
         ayamSuwirGoreng: 5000,
         ayamSuwirFrozen: 5000,
         coklatKejuGoreng: 5000,
@@ -594,6 +592,7 @@
         e.preventDefault();
 
         const nama = document.getElementById('nama').value.trim();
+        const tglDelivery = document.getElementById('tglDelivery').value;
         const catatan = document.getElementById('catatan').value.trim();
 
         let orderList = [];
@@ -622,6 +621,11 @@
         const formData = new FormData();
         formData.append('Tanggal', new Date().toLocaleString('id-ID'));
         formData.append('Nama', nama);
+        
+        // Mengirimkan kedua variasi nama agar cocok dengan nama header di Google Spreadsheet
+        formData.append('Tanggal Delivery', tglDelivery);
+        formData.append('Permintaan Tanggal Delivery', tglDelivery);
+        
         formData.append('Catatan', catatan);
         
         for (let key in names) {
@@ -635,6 +639,7 @@
 
         let text = `*HALO ELNAMI RISOL, SAYA SUDAH ORDER*\n\n`;
         text += `*Nama:* ${nama}\n`;
+        text += `*Tgl Delivery:* ${tglDelivery}\n`;
         text += `*Catatan:* ${catatan || '-'}\n\n`;
         text += `*Detail Pesanan:*\n${orderList.join('\n')}\n\n`;
         text += `*Total Risol:* ${totalPcs} Pcs\n`;
